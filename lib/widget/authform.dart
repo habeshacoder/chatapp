@@ -1,12 +1,11 @@
 import 'dart:io';
 
-import 'package:chatappudemy/widget/picker/image_pickerfile.dart';
+import 'package:group_chat/widget/picker/image_pickerfile.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AuthForm extends StatefulWidget {
   //
-  AuthForm(this.submitform, this.isloading);
+  const AuthForm(this.submitform, this.isloading, {super.key});
   final bool isloading;
   //
   final void Function(
@@ -57,10 +56,10 @@ class AuthFormState extends State<AuthForm> {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Form(
               key: globalKey,
               child: Column(
@@ -73,7 +72,7 @@ class AuthFormState extends State<AuthForm> {
                       onSaved: (newValue) {
                         _uname = newValue!;
                       },
-                      decoration: InputDecoration(labelText: 'username'),
+                      decoration: const InputDecoration(labelText: 'username'),
                     ),
                   TextFormField(
                     key: const ValueKey('email'),
@@ -86,7 +85,7 @@ class AuthFormState extends State<AuthForm> {
                     onSaved: (newValue) {
                       _email = newValue!;
                     },
-                    decoration: InputDecoration(labelText: 'email'),
+                    decoration: const InputDecoration(labelText: 'email'),
                     keyboardType: TextInputType.emailAddress,
                   ),
                   TextFormField(
@@ -95,9 +94,9 @@ class AuthFormState extends State<AuthForm> {
                       _password = newValue!;
                     },
                     obscureText: true,
-                    decoration: InputDecoration(labelText: 'password'),
+                    decoration: const InputDecoration(labelText: 'password'),
                   ),
-                  if (widget.isloading) CircularProgressIndicator(),
+                  if (widget.isloading) const CircularProgressIndicator(),
                   if (!widget.isloading)
                     ElevatedButton(
                       onPressed: _saveForm,

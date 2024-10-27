@@ -1,5 +1,6 @@
-import 'package:chatappudemy/screen/auth_screen.dart';
-import 'package:chatappudemy/screen/chatscreen.dart';
+import 'package:flutter/services.dart';
+import 'package:group_chat/screen/auth_screen.dart';
+import 'package:group_chat/screen/chatscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,9 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent, // Use any color here
+  ));
   runApp(const MyApp());
 }
 
@@ -24,12 +28,9 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ChatScreen();
+            return const ChatScreen();
           } else {
-            print('.................................connection state');
-            print(snapshot.data);
-            print(snapshot.connectionState);
-            return AuthScreen();
+            return const AuthScreen();
           }
         },
       ),

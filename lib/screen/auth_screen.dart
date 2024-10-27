@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:chatappudemy/widget/authform.dart';
+import 'package:group_chat/widget/authform.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -31,20 +31,16 @@ class _AuthScreenState extends State<AuthScreen> {
     bool islogin,
     BuildContext context,
   ) async {
-    print('object................. before  if');
     setState(() {
       isLoading = true;
     });
     try {
       if (islogin) {
-        print('............in if');
         final authInstance = FirebaseAuth.instance;
         var sampleUsre = await authInstance.signInWithEmailAndPassword(
             email: email, password: password);
-        print('.............after if');
       } else {
         if (imageUpload == null) {
-          print('............................................. inside sign up');
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text(
@@ -62,8 +58,8 @@ class _AuthScreenState extends State<AuthScreen> {
         final ref = FirebaseStorage.instance
             .ref()
             .child('user_image')
-            .child(respoonse.user!.uid + '.jpg');
-        await ref.putFile(imageUpload!);
+            .child('${respoonse.user!.uid}.jpg');
+        await ref.putFile(imageUpload);
         final url = await ref.getDownloadURL();
         await FirebaseFirestore.instance
             .collection('users')
@@ -84,8 +80,6 @@ class _AuthScreenState extends State<AuthScreen> {
       var message = 'an error occured , please check your credentials';
       if (e.message != null) {
         message = e.message!;
-        print('..................................erro:');
-        print(e.message);
         setState(() {
           isLoading = false;
         });
@@ -94,14 +88,12 @@ class _AuthScreenState extends State<AuthScreen> {
         SnackBar(
           content: Text(
             message,
-            style: TextStyle(color: Colors.red),
+            style: const TextStyle(color: Colors.red),
           ),
           backgroundColor: Colors.white,
         ),
       );
     } catch (er) {
-      print('.........................error:');
-      print(er);
       setState(
         () {
           isLoading = false;

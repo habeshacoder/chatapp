@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:961714353021:android:be93870a1fb3e156be1214",
+        "mobilesdk_app_id": "1:961714353021:android:be9cc5aedb69823bbe1214",
         "android_client_info": {
-          "package_name": "com.example.chatappudemy"
+          "package_name": "com.example.group_chat"
         }
       },
       "oauth_client": [

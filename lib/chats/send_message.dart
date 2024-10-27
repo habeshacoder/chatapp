@@ -16,12 +16,11 @@ class _SendMessageState extends State<SendMessage> {
     var activateButton = ' ';
     void sendMessage() async {
       FocusScope.of(context).unfocus();
-      final currentUserId = await FirebaseAuth.instance.currentUser!.uid;
+      final currentUserId = FirebaseAuth.instance.currentUser!.uid;
       final userNameDoc = await FirebaseFirestore.instance
           .collection('users')
           .doc(currentUserId)
           .get();
-
       FirebaseFirestore.instance.collection('chat').add(
         {
           'text': controllermessage.text.trim(),
@@ -34,18 +33,18 @@ class _SendMessageState extends State<SendMessage> {
     }
 
     return Container(
-      margin: EdgeInsets.only(top: 8),
-      padding: EdgeInsets.all(8),
+      margin: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.all(8),
       child: Row(
         children: [
           Expanded(
             child: TextField(
               controller: controllermessage,
-              decoration: InputDecoration(labelText: 'write message'),
+              decoration: const InputDecoration(labelText: 'write message'),
             ),
           ),
           IconButton(
-              icon: Icon(Icons.send),
+              icon: const Icon(Icons.send),
               color: Colors.red,
               onPressed: () {
                 sendMessage();

@@ -1,5 +1,5 @@
-import 'package:chatappudemy/chats/messages.dart';
-import 'package:chatappudemy/chats/send_message.dart';
+import 'package:group_chat/chats/messages.dart';
+import 'package:group_chat/chats/send_message.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,22 +19,21 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('chat page'),
+        title: const Text('chat page'),
         actions: [
           DropdownButton(
-            
-            icon: Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert),
             items: [
               DropdownMenuItem(
+                value: 'logout',
                 child: Container(
-                  child: Row(
-                    children: const [
+                  child: const Row(
+                    children: [
                       Icon(Icons.exit_to_app),
                       Text('logout'),
                     ],
                   ),
                 ),
-                value: 'logout',
               )
             ],
             onChanged: (value) {
@@ -45,7 +44,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ],
       ),
-      body: Column(
+      body: const Column(
         children: [
           Expanded(
             child: Message(),
